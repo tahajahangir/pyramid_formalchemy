@@ -1,4 +1,5 @@
 import os
+import sys
 
 from setuptools import setup, find_packages
 
@@ -8,8 +9,10 @@ CHANGES = open(os.path.join(here, 'CHANGES.txt')).read()
 
 requires = ['pyramid>=1.1', 'WebError', 'FormAlchemy>=1.3.8', 'Babel',
             'zope.component']
+if sys.version_info < (2, 7):
+    requires.append('ordereddict')
 
-version = '0.4.4dev'
+version = '0.4.4dev2'
 
 setup(name='pyramid_formalchemy',
       version=version,

@@ -29,6 +29,12 @@ try:
 except ImportError:
     import json
 
+try:
+    from collections import OrderedDict
+except ImportError:
+    from ordereddict import OrderedDict
+
+
 class Session(object):
     """A abstract class to implement other backend than SA"""
     def add(self, record):
@@ -106,7 +112,7 @@ class ModelView(object):
                     if has_permission('view', obj, request) or not hasattr(obj, '__acl__'):
                         models.append(obj)
 
-        results = {}
+        results = OrderedDict()  # preserve order of models
         for m in models:
             if request.format == 'html':
                 url = request.fa_url(m.__name__)
