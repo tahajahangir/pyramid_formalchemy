@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from unittest import SkipTest
 import zope.component.event
 from zope.interface import alsoProvides
 from webhelpers.paginate import Page
@@ -21,7 +22,8 @@ from pyramid_formalchemy import actions
 
 try:
     from formalchemy.ext.couchdb import Document
-except ImportError:
+    # formalchemy >1.5 raises SkipTest when couchdb is not exists
+except (ImportError, SkipTest):
     Document = None
 
 try:
